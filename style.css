@@ -1,0 +1,244 @@
+/* Reset และ Base Styles สำหรับ iPhone 16 Pro Max */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+  /* ป้องกันการ zoom บน iOS */
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#main-area {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  /* ลบ safe area padding เพื่อให้เต็มจอ */
+  padding: 0;
+}
+
+/* 3D Card Container */
+.card-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* Static Background Image */
+.static-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Flipping Overlay Container */
+.overlay-flipper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s ease-in-out;
+  transform-style: preserve-3d;
+  z-index: 2; /* ทำให้ Overlay อยู่ด้านบน */
+}
+
+.overlay-flipper.flipped {
+  transform: rotateY(180deg);
+}
+
+/* Overlay Images */
+.overlay-face {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; /* For Safari */
+}
+
+.overlay-back {
+  transform: rotateY(180deg);
+}
+
+/* --- View Management --- */
+
+/* Default state: Hide everything except the active view */
+.card-view #main-image,
+.menu-view #card-container,
+.menu-view #back-button-area,
+.horizontal-view #card-container {
+  display: none;
+}
+
+/* Show elements based on the current view on #main-area */
+.card-view #card-container,
+.menu-view #main-image,
+.horizontal-view #main-image,
+.horizontal-view #back-button-area {
+  display: block;
+}
+
+/* Hide menu bar in horizontal view */
+.horizontal-view #menu-bar {
+  display: none;
+}
+
+/* --- Invisible Menu Bar --- */
+#menu-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(6vh + env(safe-area-inset-bottom)); /* << ปรับความสูงลงอีก */
+  z-index: 20;
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.menu-hotspot {
+  flex-grow: 1;
+  height: 100%;
+  /* ลบสีพื้นหลังสำหรับ Debug ออก ทำให้เมนูล่องหนโดยสมบูรณ์ */
+  cursor: pointer;
+}
+
+/* Main image for other modes (menu, horizontal) */
+#main-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 1;
+  display: none; /* Hidden by default */
+}
+
+/* Back Button Area */
+.back-button-area {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 80px;
+  height: 80px;
+  z-index: 10;
+  background: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  /* Visual feedback */
+  transition: background-color 0.2s ease;
+}
+
+.back-button-area:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.back-button-area:active {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(0.95);
+}
+
+/* แสดง back button เฉพาะในโหมด horizontal */
+.horizontal-mode .back-button-area {
+  display: block !important;
+}
+
+/* ซ่อน card container ในโหมด horizontal */
+.horizontal-mode .card-container {
+  display: block; /* แก้ไขให้แสดง container เสมอ */
+}
+
+.horizontal-mode #main-image {
+  display: block;
+}
+
+/* แสดง card container ในโหมด card */
+.card-mode .card-container {
+  display: block;
+}
+
+.card-mode #main-image {
+  display: none;
+}
+
+.card-mode .back-button-area {
+  display: none !important;
+}
+
+/* Media Queries สำหรับ iPhone 16 Pro Max */
+@media screen and (max-width: 430px) and (max-height: 932px) {
+  /* iPhone 16 Pro Max Portrait */
+  .static-background,
+  .overlay-face,
+  #main-image {
+    /* ให้เต็มจอทั้งหมด ไม่เว้นพื้นที่ Dynamic Island */
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+  }
+
+  .back-button-area {
+    top: 3%;
+    left: 3%;
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media screen and (max-width: 932px) and (max-height: 430px) {
+  /* iPhone 16 Pro Max Landscape */
+  .static-background,
+  .overlay-face,
+  #main-image {
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    top: 0;
+    left: 0;
+  }
+
+  .back-button-area {
+    top: 5%;
+    left: 3%;
+    width: 60px;
+    height: 60px;
+  }
+}
+
+/* สำหรับ iOS Safari - ป้องกัน bounce effect */
+body {
+  position: fixed;
+  overflow: hidden;
+}
+
+/* ปรับแต่งสำหรับ PWA mode - ให้เต็มจอทั้งหมด */
+@media (display-mode: standalone) {
+  #main-area {
+    padding: 0;
+  }
+
+  .static-background,
+  .overlay-face,
+  #main-image {
+    /* ใน PWA mode ให้เต็มจอทั้งหมด */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+}

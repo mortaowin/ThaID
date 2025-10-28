@@ -1,0 +1,556 @@
+{
+    "cursor.general.globalCursorIgnoreList": [],
+    // Editor Settings - Advanced Auto-execution Configuration
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit",
+    "source.sortImports": "explicit"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.rulers": [88, 120],
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": true,
+    "editor.suggestSelection": "first",
+    "editor.snippetSuggestions": "top",
+    "editor.inlineSuggest.enabled": true,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "editor.stickyScroll.enabled": true,
+    // Files - Ultra-fast Auto-save for 100% AUTO execution
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 50,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.exclude": {
+    "/pycache": true,
+    "/*.pyc": true,
+    "/node_modules": true,
+    "/.pytest_cache": true,
+    "/.mypy_cache": true,
+    "/.ruff_cache": true,
+    "/dist": true,
+    "/build": true,
+    "/.next": true,
+    "/.nuxt": true
+    },
+    "files.watcherExclude": {
+    "/.git/objects/": true,
+    "/.git/subtree-cache/": true,
+    "/node_modules/": true,
+    "/.venv/": true,
+    "/venv/": true,
+    "/env/": true
+    },
+    // Python Settings - 100% AUTO execution
+    "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit"
+    }
+    },
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+    "python.terminal.activateEnvironment": true,
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.ruffEnabled": true,
+    "python.linting.mypyEnabled": true,
+    "python.formatting.provider": "black",
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": ["tests"],
+    "python.analysis.typeCheckingMode": "strict",
+    "python.analysis.autoImportCompletions": true,
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.extraPaths": ["${workspaceFolder}/backend", "${workspaceFolder}/agents"],
+    // 100% AUTO EXECUTION SYSTEM - PRODUCTION READY
+    "runOnSave.commands": [
+    {
+    "match": ".*\.py$",
+    "command": "python "${file}"",
+    "runIn": "terminal",
+    "runningStatusMessage": "🚀 AUTO-EXECUTING Python...",
+    "finishStatusMessage": "✅ Python execution completed",
+    "isAsync": true
+    },
+    {
+    "match": ".*main\.py$",
+    "command": "cd "${workspaceFolder}" && python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000",
+    "runIn": "terminal",
+    "runningStatusMessage": "🔥 AUTO-STARTING FastAPI server...",
+    "finishStatusMessage": "🌟 FastAPI server running on http://localhost:8000",
+    "isAsync": true
+    },
+    {
+    "match": ".app\.py$",
+    "command": "cd "${workspaceFolder}" && python "${file}"",
+    "runIn": "terminal",
+    "runningStatusMessage": "🚀 AUTO-EXECUTING Flask/FastAPI app...",
+    "finishStatusMessage": "✅ App running",
+    "isAsync": true
+    },
+    {
+    "match": ".requirements.\.txt$",
+    "command": "pip install -r "${file}"",
+    "runIn": "terminal",
+    "runningStatusMessage": "📦 AUTO-INSTALLING dependencies...",
+    "finishStatusMessage": "✅ Dependencies installed",
+    "isAsync": true
+    },
+    {
+    "match": ".package\.json$",
+    "command": "npm install",
+    "runIn": "terminal",
+    "runningStatusMessage": "📦 AUTO-INSTALLING npm packages...",
+    "finishStatusMessage": "✅ NPM packages installed",
+    "isAsync": true
+    },
+    {
+    "match": ".\.(js|jsx)$",
+    "command": "node "${file}"",
+    "runIn": "terminal",
+    "runningStatusMessage": "🚀 AUTO-EXECUTING JavaScript...",
+    "finishStatusMessage": "✅ JavaScript execution completed",
+    "isAsync": true
+    },
+    {
+    "match": ".\.(ts|tsx)$",
+    "command": "npx ts-node "${file}"",
+    "runIn": "terminal",
+    "runningStatusMessage": "🚀 AUTO-EXECUTING TypeScript...",
+    "finishStatusMessage": "✅ TypeScript execution completed",
+    "isAsync": true
+    },
+    {
+    "match": ".docker-compose.\.yml$",
+    "command": "docker-compose up -d --build",
+    "runIn": "terminal",
+    "runningStatusMessage": "🐳 AUTO-DEPLOYING Docker containers...",
+    "finishStatusMessage": "✅ Docker containers deployed",
+    "isAsync": true
+    },
+    {
+    "match": ".*Dockerfile$",
+    "command": "docker build -t auto-build .",
+    "runIn": "terminal",
+    "runningStatusMessage": "🐳 AUTO-BUILDING Docker image...",
+    "finishStatusMessage": "✅ Docker image built",
+    "isAsync": true
+    }
+    ],
+    // EMERALD WALK RUN ON SAVE - 100% AUTO EXECUTION
+    "emeraldwalk.runonsave": {
+    "commands": [
+    {
+    "match": "\.py$",
+    "isAsync": true,
+    "cmd": "python "${file}""
+    },
+    {
+    "match": "main\.py$",
+    "isAsync": true,
+    "cmd": "cd "${workspaceFolder}" && python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000"
+    },
+    {
+    "match": "app\.py$",
+    "isAsync": true,
+    "cmd": "cd "${workspaceFolder}" && python "${file}""
+    },
+    {
+    "match": "requirements.\.txt$",
+    "isAsync": true,
+    "cmd": "pip install -r "${file}""
+    },
+    {
+    "match": "package\.json$",
+    "isAsync": true,
+    "cmd": "npm install"
+    },
+    {
+    "match": "\.(js|jsx)$",
+    "isAsync": true,
+    "cmd": "node "${file}""
+    },
+    {
+    "match": "\.(ts|tsx)$",
+    "isAsync": true,
+    "cmd": "npx ts-node "${file}""
+    },
+    {
+    "match": "docker-compose.\.yml$",
+    "isAsync": true,
+    "cmd": "docker-compose up -d --build"
+    },
+    {
+    "match": "Dockerfile$",
+    "isAsync": true,
+    "cmd": "docker build -t auto-build ."
+    },
+    {
+    "match": "\.sql$",
+    "isAsync": true,
+    "cmd": "echo 'SQL file saved - ready for execution'"
+    }
+    ]
+    },
+    // Advanced Task Runner - 100% AUTO PRODUCTION
+    "tasks.version": "2.0.0",
+    "tasks.tasks": [
+    {
+    "label": "AUTO Python Execute",
+    "type": "shell",
+    "command": "python",
+    "args": ["${file}"],
+    "group": {
+    "kind": "build",
+    "isDefault": true
+    },
+    "presentation": {
+    "echo": true,
+    "reveal": "always",
+    "focus": false,
+    "panel": "shared",
+    "showReuseMessage": false,
+    "clear": false
+    },
+    "problemMatcher": [],
+    "runOptions": {
+    "runOn": "fileSave"
+    }
+    },
+    {
+    "label": "AUTO FastAPI Server",
+    "type": "shell",
+    "command": "python",
+    "args": ["-m", "uvicorn", "main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"],
+    "group": "build",
+    "presentation": {
+    "echo": true,
+    "reveal": "always",
+    "focus": false,
+    "panel": "shared"
+    },
+    "runOptions": {
+    "runOn": "fileSave"
+    }
+    },
+    {
+    "label": "AUTO Docker Deploy",
+    "type": "shell",
+    "command": "docker-compose",
+    "args": ["up", "-d", "--build"],
+    "group": "build",
+    "presentation": {
+    "echo": true,
+    "reveal": "always",
+    "focus": false,
+    "panel": "shared"
+    }
+    },
+    {
+    "label": "AUTO Install Dependencies",
+    "type": "shell",
+    "command": "pip",
+    "args": ["install", "-r", "requirements.txt"],
+    "group": "build",
+    "presentation": {
+    "echo": true,
+    "reveal": "always",
+    "focus": false,
+    "panel": "shared"
+    }
+    }
+    ],
+    // JavaScript/TypeScript Settings - Enhanced AUTO execution
+    "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "typescript.preferences.includePackageJsonAutoImports": "on",
+    "javascript.preferences.includePackageJsonAutoImports": "on",
+    // Prettier Settings - Optimized
+    "prettier.semi": true,
+    "prettier.singleQuote": false,
+    "prettier.tabWidth": 2,
+    "prettier.trailingComma": "es5",
+    "prettier.printWidth": 100,
+    "prettier.bracketSpacing": true,
+    "prettier.arrowParens": "always",
+    // ESLint Settings - Enhanced
+    "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "eslint.run": "onSave",
+    // JSON/YAML Settings
+    "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    // Markdown Settings
+    "[markdown]": {
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
+    "editor.wordWrap": "on"
+    },
+    // Docker Settings - AUTO execution
+    "[dockerfile]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    // Terminal Settings - Enhanced for 100% AUTO execution
+    "terminal.integrated.defaultProfile.windows": "PowerShell",
+    "terminal.integrated.env.windows": {
+    "PYTHONIOENCODING": "utf-8",
+    "PYTHONPATH": "${workspaceFolder}",
+    "AUTO_EXECUTE": "true",
+    "FORCE_COLOR": "1",
+    "NODE_ENV": "development"
+    },
+    "terminal.integrated.automationProfile.windows": {
+    "path": "powershell.exe",
+    "args": [
+    "-NoExit",
+    "-Command",
+    "& {Write-Host '🚀 100% AUTO-EXECUTION Terminal Ready - Production Mode' -ForegroundColor Green; Write-Host 'All files will auto-execute on save!' -ForegroundColor Yellow}"
+    ]
+    },
+    "terminal.integrated.allowChords": false,
+    "terminal.integrated.allowMnemonics": false,
+    "terminal.integrated.confirmOnExit": "never",
+    "terminal.integrated.enableMultiLinePasteWarning": false,
+    // Git Settings - Enhanced AUTO
+    "git.autofetch": true,
+    "git.confirmSync": false,
+    "git.enableSmartCommit": true,
+    "git.postCommitCommand": "sync",
+    "git.autoStash": true,
+    "git.autoRepositoryDetection": true,
+    "git.enableCommitSigning": false,
+    // Extension Settings - Advanced AUTO
+    "redhat.telemetry.enabled": false,
+    "docker.showStartPage": false,
+    "jupyter.askForKernelRestart": false,
+    "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+    },
+    // Security Settings - Optimized for AUTO development
+    "security.workspace.trust.untrustedFiles": "open",
+    "security.workspace.trust.enabled": false,
+    "security.workspace.trust.banner": "never",
+    "security.workspace.trust.startupPrompt": "never",
+    // AI/Copilot Settings - Maximum Enhancement
+    "github.copilot.enable": {
+    "*": true,
+    "yaml": true,
+    "plaintext": true,
+    "markdown": true,
+    "python": true,
+    "javascript": true,
+    "typescript": true
+    },
+    "github.copilot.advanced": {
+    "secret_mode": true,
+    "auto_complete": true,
+    "instant_suggestions": true
+    },
+    // Project Specific Settings - Enhanced
+    "search.exclude": {
+    "/node_modules": true,
+    "/.venv": true,
+    "/venv": true,
+    "/env": true,
+    "/pycache": true,
+    "/dist": true,
+    "/build": true,
+    "/coverage": true,
+    "/.pytest_cache": true,
+    "/logs": true,
+    "/data": true,
+    "/volumes": true
+    },
+    // Custom File Associations - Enhanced AUTO
+    "files.associations": {
+    ".env": "dotenv",
+    "Dockerfile*": "dockerfile",
+    "docker-compose*.yml": "dockercompose",
+    ".pyi": "python",
+    "requirements.txt": "pip-requirements",
+    ".secret": "json",
+    ".config": "json",
+    "*.auto": "python"
+    },
+    // Workspace Colors - Advanced Theme
+    "workbench.colorCustomizations": {
+    "activityBar.background": "#0d1117",
+    "activityBar.foreground": "#58a6ff",
+    "statusBar.background": "#21262d",
+    "statusBar.foreground": "#58a6ff",
+    "terminal.background": "#0d1117",
+    "terminal.foreground": "#f0f6fc",
+    "editor.background": "#0d1117",
+    "editor.foreground": "#f0f6fc"
+    },
+    // Performance Settings - Maximum Optimization for AUTO execution
+    "files.maxMemoryForLargeFilesMB": 8192,
+    "editor.largeFileOptimizations": false,
+    "extensions.ignoreRecommendations": false,
+    "workbench.settings.enableNaturalLanguageSearch": true,
+    "workbench.startupEditor": "none",
+    "window.restoreWindows": "all",
+    // Debugging - Advanced Configuration for AUTO
+    "debug.console.fontSize": 14,
+    "debug.console.wordWrap": true,
+    "debug.inlineValues": "on",
+    "debug.showBreakpointsInOverviewRuler": true,
+    "debug.allowBreakpointsEverywhere": true,
+    "debug.openDebug": "openOnDebugBreak",
+    "debug.onTaskErrors": "showErrors",
+    // Oracle Settings
+    "oracledevtools.connectionConfiguration.configFilesFolder": "C:\Users\chaic\Oracle\network\admin",
+    "oracledevtools.connectionConfiguration.walletFileFolder": "C:\Users\chaic\Oracle\network\admin",
+    "[oraclesql]": {
+    "editor.suggest.showSnippets": true,
+    "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "on",
+    "other": "on"
+    }
+    },
+    "oracledevtools.bookmarkFileFolder": "C:\Users\chaic\Oracle\oracle.oracledevtools",
+    "oracledevtools.download.otherFolder": "C:\Users\chaic\downloads",
+    // Advanced AI Settings
+    "tabnine.experimentalAutoImports": true,
+    "yaml.schemas": {
+    "c:\Users\chaic\.cursor\extensions\continue.continue-1.0.15-win32-x64\config-yaml-schema.json": [
+    ".continue/**/*.yaml"
+    ]
+    },
+    // 100% AUTO Command Execution - PRODUCTION LEVEL
+    "kilo-code.allowedCommands": [
+    "npm install",
+    "npm run dev",
+    "npm run build",
+    "npm start",
+    "npm test",
+    "yarn install",
+    "yarn dev",
+    "yarn build",
+    "yarn start",
+    "tsc",
+    "npx",
+    "node",
+    "ts-node",
+    "docker",
+    "docker-compose",
+    "git",
+    "git add",
+    "git commit",
+    "git push",
+    "git pull",
+    "git log",
+    "git diff",
+    "git show",
+    "python",
+    "python -m",
+    "pip",
+    "pip install",
+    "uvicorn",
+    "fastapi",
+    "flask",
+    "django",
+    "pytest",
+    "black",
+    "ruff",
+    "mypy",
+    "cd",
+    "ls",
+    "dir",
+    "cp",
+    "copy",
+    "mv",
+    "move",
+    "rm",
+    "del",
+    "cat",
+    "type",
+    "touch",
+    "echo",
+    "mkdir",
+    "rmdir",
+    "code",
+    "vim",
+    "nano",
+    "pm2",
+    "systemctl",
+    "service"
+    ],
+    // Console Ninja - Enhanced
+    "console-ninja.featureSet": "Community",
+    "console-ninja.toolsToEnableSupportAutomaticallyFor": {
+    "live-server": true,
+    "preview-on-web-server": true,
+    "browser-sync": true
+    },
+    // Advanced Keybindings for Instant AUTO Execution
+    "keyboard.dispatch": "keyCode",
+    "workbench.list.automaticKeyboardNavigation": true,
+    "workbench.quickOpen.closeOnFocusLost": false,
+    // Secret Advanced Features for 100% AUTO
+    "workbench.experimental.settingsProfiles.enabled": true,
+    "workbench.experimental.cloudChanges.enabled": true,
+    "editor.experimental.asyncTokenization": true,
+    "editor.experimental.asyncTokenizationLogging": false,
+    "terminal.integrated.experimentalUseTitleEvent": true,
+    // Maximum Performance Boost for AUTO execution
+    "extensions.experimental.affinity": {
+    "ms-python.python": 1,
+    "esbenp.prettier-vscode": 1,
+    "ms-vscode.vscode-typescript-next": 1,
+    "emeraldwalk.runonsave": 1
+    },
+    // Additional formatters for AUTO execution
+    "[dotenv]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[ignore]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[shellscript]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell"
+    },
+    // AUTO execution notifications
+    "workbench.statusBar.visible": true,
+    "workbench.activityBar.visible": true,
+    "notifications.showExtensionsNotifications": true,
+    // File watcher for instant AUTO execution
+    "files.watcherInclude": {
+    "/*.py": true,
+    "/.js": true,
+    "**/.ts": true,
+    "/*.jsx": true,
+    "/.tsx": true,
+    "**/requirements.txt": true,
+    "/package.json": true,
+    "/docker-compose*.yml": true,
+    "**/Dockerfile": true
+    }
+    }

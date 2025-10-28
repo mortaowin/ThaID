@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ThaiD Clone</title>
+    <!-- Viewport สำหรับ iPhone 16 Pro Max - เต็มจอทั้งหมด -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- PWA Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="ThaiD Clone" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#000000" />
+    <meta name="msapplication-navbutton-color" content="#000000" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <!-- Prevent zoom on iOS -->
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Preload critical resources -->
+    <link rel="preload" href="images/1.png" as="image" />
+    <link rel="preload" href="style.css" as="style" />
+    <link rel="preload" href="script.js" as="script" />
+
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="images/1.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/1.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/1.png" />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="main-area" class="card-view">
+      <!-- View for Flipping Card -->
+      <div id="card-container">
+        <img
+          class="static-background"
+          src="images/1.png"
+          draggable="false"
+          alt="Static Card Background"
+        />
+        <div id="overlay-flipper" class="overlay-flipper">
+          <img class="overlay-face" src="images/1.1.png" draggable="false" alt="Overlay Front" />
+          <img
+            class="overlay-face overlay-back"
+            src="images/2.1.png"
+            draggable="false"
+            alt="Overlay Back"
+          />
+        </div>
+      </div>
+
+      <!-- View for other full-screen images (Docs, History, Settings, Horizontal) -->
+      <img id="main-image" draggable="false" alt="Main View Image" style="display: none" />
+
+      <!-- Back Button for Horizontal View -->
+      <div id="back-button-area" style="display: none"></div>
+
+      <!-- Invisible Menu Hotspots Bar -->
+      <div id="menu-bar">
+        <div id="menu-home" class="menu-hotspot"></div>
+        <div id="menu-docs" class="menu-hotspot"></div>
+        <div id="menu-history" class="menu-hotspot"></div>
+        <div id="menu-settings" class="menu-hotspot"></div>
+      </div>
+    </div>
+
+    <!-- PWA Install Script -->
+    <script>
+      // Service Worker Registration (for PWA)
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then((registration) => {
+              console.log("SW registered: ", registration);
+            })
+            .catch((registrationError) => {
+              console.log("SW registration failed: ", registrationError);
+            });
+        });
+      }
+
+      // PWA Install Prompt
+      let deferredPrompt;
+      window.addEventListener("beforeinstallprompt", (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+
+        // Show install prompt after 3 seconds
+        setTimeout(() => {
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+              if (choiceResult.outcome === "accepted") {
+                console.log("User accepted the A2HS prompt");
+              } else {
+                console.log("User dismissed the A2HS prompt");
+              }
+              deferredPrompt = null;
+            });
+          }
+        }, 3000);
+      });
+    </script>
+
+    <script src="script.js"></script>
+  </body>
+</html>

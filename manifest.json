@@ -1,0 +1,23 @@
+{
+  "name": "ThaiD Clone",
+  "short_name": "ThaiD",
+  "description": "ThaiD Clone - Full Screen Web App",
+  "start_url": "/",
+  "display": "fullscreen",
+  "orientation": "portrait-primary",
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "scope": "/",
+  "lang": "th",
+  "icons": [
+    {
+      "src": "images/1.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "productivity"],
+  "prefer_related_applications": false,
+  "display_override": ["fullscreen", "standalone", "minimal-ui"]
+}
