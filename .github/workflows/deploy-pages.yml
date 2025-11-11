@@ -1,4 +1,4 @@
-name: Deploy static site to GitHub Pages
+name: Deploy GitHub Pages
 
 on:
   push:
@@ -10,36 +10,22 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Prepare static site folder
-        run: |
-          mkdir -p site
-          cp index.html site/ || true
-          cp script.js site/ || true
-          cp style.css site/ || true
-          cp sw.js site/ || true
-          cp manifest.json site/ || true
-          if [ -d images ]; then cp -r images site/; fi
-          if [ -d "บัตรหน้าหลัง" ]; then cp -r "บัตรหน้าหลัง" site/; fi
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: site
+          path: '.'
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
