@@ -36,14 +36,7 @@ function isFullscreenActive() {
   return !!(document.fullscreenElement || document.webkitFullscreenElement);
 }
 
-function showFullscreenPrompt() {
-  if (document.getElementById('fullscreen-prompt')) return;
-  const prompt = document.createElement('div');
-  prompt.id = 'fullscreen-prompt';
-  prompt.innerHTML = `<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.8); color: white; padding: 20px; border-radius: 10px; text-align: center; z-index: 1000;">แตะเพื่อเข้าสู่โหมดเต็มจอ</div>`;
-  document.body.appendChild(prompt);
-  setTimeout(() => prompt.remove(), 3000);
-}
+function showFullscreenPrompt() {}
 
 function handleFirstInteraction() {
   console.log("Interaction detected. Attempting to go fullscreen.");
@@ -117,6 +110,18 @@ function flipCard() {
 
 
 
+
+// Auto fullscreen attempt on load with user-gesture fallback
+document.addEventListener('DOMContentLoaded', () => {
+  try { setView('card'); } catch(e) { /* ignore */ }
+  // Try to enter fullscreen immediately (will be ignored if browser requires gesture)
+  requestFullscreen();
+  // Fallback: bind first user interaction to trigger fullscreen once
+  if (!isFullscreenActive()) {
+    mainArea?.addEventListener('touchstart', handleFirstInteraction, { once: true });
+    mainArea?.addEventListener('click', handleFirstInteraction, { once: true });
+  }
+});
 
 pinKeys.forEach(btn => {
   btn.addEventListener("click", () => {
