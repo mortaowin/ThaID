@@ -107,9 +107,12 @@ function flipCard() {
 // --- Event Listeners ---
 
 // 1. Card Interaction
-overlayFlipper.addEventListener("click", flipCard); // << แก้ไข: ย้าย listener มาที่ overlayFlipper
+overlayFlipper.addEventListener("click", flipCard);
+// Support desktop double-click to flip
+overlayFlipper.addEventListener("dblclick", flipCard); // << แก้ไข: ย้าย listener มาที่ overlayFlipper
 
 let tapTimer;
+cardContainer.addEventListener("dblclick", () => setView("horizontal"));
 cardContainer.addEventListener("touchend", () => { // คงไว้ที่ cardContainer สำหรับ double tap
   if (tapTimer) {
     clearTimeout(tapTimer);
@@ -154,3 +157,6 @@ window.addEventListener("load", () => {
   mainArea.addEventListener('touchstart', handleFirstInteraction, { once: true });
   mainArea.addEventListener('click', handleFirstInteraction, { once: true });
 });
+
+// Single click on card container (desktop) to ensure card view
+cardContainer.addEventListener("click", () => { if (state.currentView !== "card") setView("card"); });
