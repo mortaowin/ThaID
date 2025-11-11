@@ -3,12 +3,17 @@ const cardContainer = document.getElementById("card-container");
 const overlayFlipper = document.getElementById("overlay-flipper");
 const mainImage = document.getElementById("main-image");
 const backButtonArea = document.getElementById("back-button-area");
+const newsSection = document.getElementById("news-section");
 
 // --- Menu Hotspots ---
 const menuHome = document.getElementById("menu-home");
 const menuDocs = document.getElementById("menu-docs");
 const menuHistory = document.getElementById("menu-history");
 const menuSettings = document.getElementById("menu-settings");
+let swipeStartX = null, swipeStartY = null, swipeStartTime = 0;
+let longPressTimer = null;
+const privacyShade = document.getElementById("privacy-shade");
+
 
 const state = {
   currentView: "card", // 'card', 'horizontal', 'docs', 'history', 'settings'
@@ -74,6 +79,12 @@ function setView(viewName) {
     viewClass = 'menu-view';
   }
   mainArea.className = viewClass; // e.g., "card-view" or "menu-view"
+  if (newsSection){
+    const showNews = (viewName === 'docs');
+    newsSection.classList.toggle('hidden', !showNews);
+  }
+
+  if (privacyShade) { privacyShade.classList.toggle("hidden", viewClass !== "card-view"); }
 
   // Set the correct image source for menu views
   switch(viewName) {
@@ -104,53 +115,43 @@ function flipCard() {
   }
 }
 
-// --- Event Listeners ---
 
-// 1. Card Interaction
-overlayFlipper.addEventListener("click", flipCard); // << แก้ไข: ย้าย listener มาที่ overlayFlipper
 
-let tapTimer;
-cardContainer.addEventListener("touchend", () => { // คงไว้ที่ cardContainer สำหรับ double tap
-  if (tapTimer) {
-    clearTimeout(tapTimer);
-    tapTimer = null;
-    setView("horizontal"); // Double tap
-  } else {
-    tapTimer = setTimeout(() => {
-      tapTimer = null;
-    }, 300);
-  }
-});
 
-// 2. Horizontal Mode Interaction
-mainImage.addEventListener("click", () => {
-  if (state.currentView === "horizontal") {
-    const currentSrc = mainImage.src;
-    mainImage.src = currentSrc.includes("6.png") ? "images/7.png" : "images/6.png";
-  }
-});
-
-// 3. Back Button
-backButtonArea.addEventListener("click", () => setView("card"));
-backButtonArea.addEventListener("touchend", () => setView("card"));
-
-// 4. Invisible Menu Hotspots
-menuHome.addEventListener("click", () => setView("card"));
-menuDocs.addEventListener("click", () => setView("docs"));
-menuHistory.addEventListener("click", () => setView("history"));
-menuSettings.addEventListener("click", () => setView("settings"));
-
-// --- Initial Load ---
-window.addEventListener("load", () => {
-  console.log("Page loaded. Setting up initial view and fullscreen listeners.");
-  setView('card'); // Set initial view
-  setTimeout(() => {
-    if (!state.isFullscreen && !state.hasInteracted) {
-      showFullscreenPrompt();
+pinKeys.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const key = btn.dataset.key;
+    const action = btn.dataset.action;
+    if (action === "backspace"){ pinBuffer = pinBuffer.slice(0,-1); updateDots(); return; }
+    if (key){
+      if (pinBuffer.length < PIN_REQUIRED_LENGTH){
+        pinBuffer += key;
+        updateDots();
+        if (pinBuffer.length === PIN_REQUIRED_LENGTH){
+          if (pinBuffer === CORRECT_PIN){ pinScreen.style.display = "none"; }
+          else { clearPin(true); }
+        }
+      }
     }
-  }, 1000);
+  });
+});
 
-  // Add listeners for first interaction to trigger fullscreen
-  mainArea.addEventListener('touchstart', handleFirstInteraction, { once: true });
-  mainArea.addEventListener('click', handleFirstInteraction, { once: true });
+document.addEventListener("keydown", (e) => {
+  if (!pinScreen || pinScreen.style.display === "none") return;
+  if (e.key >= "0" && e.key <= "9"){
+    if (pinBuffer.length < PIN_REQUIRED_LENGTH){
+      pinBuffer += e.key;
+      updateDots();
+      if (pinBuffer.length === PIN_REQUIRED_LENGTH){
+        if (pinBuffer === CORRECT_PIN){ pinScreen.style.display = "none"; }
+        else { clearPin(true); }
+      }
+    }
+  } else if (e.key === "Backspace"){
+    pinBuffer = pinBuffer.slice(0,-1); updateDots();
+  }
+});
+
+pinForgot?.addEventListener("click", () => {
+  // ไว้ต่อยอด flow ลืมรหัสภายหลัง (ตอนนี้ไม่แสดงเตือนตามที่ต้องการความเงียบ)
 });

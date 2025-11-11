@@ -39,9 +39,12 @@
     <link rel="icon" type="image/png" href="images/1.png" />
 
     <link rel="stylesheet" href="style.css" />
+      <link rel="preload" as="image" href="images/1.png">
+    <link rel="preload" as="image" href="images/1.1.png">
+    <link rel="preload" as="image" href="images/2.1.png">
   </head>
   <body>
-    <div id="main-area" class="card-view">
+<div id="main-area" class="card-view">
       <!-- View for Flipping Card -->
       <div id="card-container">
         <img
@@ -50,7 +53,8 @@
           draggable="false"
           alt="Static Card Background"
         />
-        <div id="overlay-flipper" class="overlay-flipper">
+        <div id="overlay-flipper" class="overlay-flipper" aria-label="บัตรประชาชนดิจิทัล">
+          <div id="privacy-shade" class="privacy-shade hidden" aria-hidden="true">กดค้างเพื่อเปิดเผยชั่วคราว</div>
           <img class="overlay-face" src="images/1.1.png" draggable="false" alt="Overlay Front" />
           <img
             class="overlay-face overlay-back"
@@ -59,22 +63,83 @@
             alt="Overlay Back"
           />
         </div>
+      
+        
+    
       </div>
 
       <!-- View for other full-screen images (Docs, History, Settings, Horizontal) -->
       <img id="main-image" draggable="false" alt="Main View Image" style="display: none" />
 
+      <!-- Announcements / ข่าวประกาศ (scrollable) -->
+      <section id="news-section" class="news-scroll hidden" aria-label="ข่าวประกาศ">
+        <article class="news-card">
+          <img class="news-icon" alt="" src="images/logo.png" onerror="this.style.display='none'"/>
+          <div class="news-content">
+            <h3>แจ้งเตือน!! ระวัง SMS หลอกลวง</h3>
+            <p>กรมการปกครอง ไม่มีนโยบายส่ง SMS ไปยังประชาชนแต่โดยประการใด ขอประชาสัมพันธ์ ห้ามกดลิงก์ที่แนบมา...</p>
+            <div class="news-meta">23/07/2566</div>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img class="news-icon" alt="" src="images/logo.png" onerror="this.style.display='none'"/>
+          <div class="news-content">
+            <h3>BORA WEB PORTAL</h3>
+            <p>ระบบบริการงานทะเบียนออนไลน์ ผ่านเว็บไซต์ https://thportal.bora.dopa.go.th โดยยืนยันตัวตนผ่านแอปพลิเคชัน...</p>
+            <div class="news-meta">13/05/2566</div>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img class="news-icon" alt="" src="images/logo.png" onerror="this.style.display='none'"/>
+          <div class="news-content">
+            <h3>ระบบให้บริการประชาชนด้วย ThaID</h3>
+            <p>รวมช่องทางบริการภาครัฐที่เข้าสู่ระบบด้วยแอป ThaID ที่ https://www.bora.dopa.go.th/thaid_authen ...</p>
+            <div class="news-meta">26/04/2566</div>
+          </div>
+        </article>
+
+        <article class="news-card">
+          <img class="news-icon" alt="" src="images/logo.png" onerror="this.style.display='none'"/>
+          <div class="news-content">
+            <h3>ชื่อแอปพลิเคชันใหม่ ThaID</h3>
+            <p>ยกระดับการให้บริการผ่านการพัฒนาระบบพิสูจน์และยืนยันตัวตนทางดิจิทัล จาก "D.DOPA" เป็น "ThaID" ...</p>
+            <div class="news-meta">14/03/2566</div>
+          </div>
+        </article>
+      </section>
+    
+
       <!-- Back Button for Horizontal View -->
-      <div id="back-button-area" style="display: none"></div>
+      <div id="back-button-area" role="button" aria-label="ย้อนกลับ" tabindex="0" style="display: none"></div>
 
       <!-- Invisible Menu Hotspots Bar -->
       <div id="menu-bar">
-        <div id="menu-home" class="menu-hotspot"></div>
-        <div id="menu-docs" class="menu-hotspot"></div>
-        <div id="menu-history" class="menu-hotspot"></div>
-        <div id="menu-settings" class="menu-hotspot"></div>
+        <div id="menu-home" role="button" aria-label="หน้าแรก" tabindex="0" class="menu-hotspot"></div>
+        <div id="menu-docs" role="button" aria-label="เอกสาร" tabindex="0" class="menu-hotspot"></div>
+        <div id="menu-history" role="button" aria-label="ประวัติ" tabindex="0" class="menu-hotspot"></div>
+        <div id="menu-settings" role="button" aria-label="ตั้งค่า" tabindex="0" class="menu-hotspot"></div>
       </div>
-    </div>
+      <div id="fullscreen-prompt" class="hidden">แตะเพื่อเข้าสู่โหมดเต็มจอ</div>
+    
+
+</div>
+            <div class="modal-actions">
+              <button id="simulate-scan" class="primary">สแกน</button>
+              <button class="close-modal">ปิด</button>
+            </div>
+          </div>
+        </div>
+
+        
+<button id="consent-deny">ปฏิเสธ</button>
+            </div>
+          </div>
+        </div>
+
+        
+</div>
 
     <!-- PWA Install Script -->
     <script>
