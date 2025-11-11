@@ -81,10 +81,11 @@
       // Service Worker Registration (for PWA)
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
+          // Use relative path so it works under GitHub Pages subdirectory (e.g., /ThaID/)
           navigator.serviceWorker
-            .register("/sw.js")
+            .register("sw.js")
             .then((registration) => {
-              console.log("SW registered: ", registration);
+              console.log("SW registered: ", registration.scope);
             })
             .catch((registrationError) => {
               console.log("SW registration failed: ", registrationError);

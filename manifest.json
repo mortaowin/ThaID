@@ -2,12 +2,13 @@
   "name": "ThaiD Clone",
   "short_name": "ThaiD",
   "description": "ThaiD Clone - Full Screen Web App",
-  "start_url": "/",
+  "id": "thaid-clone",
+  "start_url": "./index.html",
   "display": "fullscreen",
   "orientation": "portrait-primary",
   "theme_color": "#000000",
   "background_color": "#000000",
-  "scope": "/",
+  "scope": "./",
   "lang": "th",
   "icons": [
     {

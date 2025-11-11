@@ -1,28 +1,29 @@
-const CACHE_NAME = "thaid-clone-v1";
+const CACHE_NAME = "thaid-clone-v2";
 const urlsToCache = [
-  "/",
-  "/index.html",
-  "/style.css",
-  "/script.js",
-  "/manifest.json",
-  "/images/1.png",
-  "/images/2.png",
-  "/images/3.png",
-  "/images/4.png",
-  "/images/5.png",
-  "/images/6.png",
-  "/images/7.png",
-  "/images/8.png",
+  "./",
+  "index.html",
+  "style.css",
+  "script.js",
+  "manifest.json",
+  "images/1.png",
+  "images/2.png",
+  "images/3.png",
+  "images/4.png",
+  "images/5.png",
+  "images/6.png",
+  "images/7.png",
+  "images/8.png",
 ];
 
 // Install event - cache resources
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log("Opened cache");
+      console.log("Opened cache", CACHE_NAME);
       return cache.addAll(urlsToCache);
     })
   );
+  self.skipWaiting();
 });
 
 // Fetch event - serve from cache
@@ -49,4 +50,5 @@ self.addEventListener("activate", (event) => {
       );
     })
   );
+  clients.claim();
 });
