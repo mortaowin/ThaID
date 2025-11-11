@@ -1,8 +1,17 @@
-# Godtier MCP Server
+# 🚀 Godtier MCP Server
+
+![MCP Server](https://raw.githubusercontent.com/mortaowin/ThaID/main/images/8.png)
+
+[![GitHub Stars](https://img.shields.io/github/stars/mortaowin/ThaID?style=social)](https://github.com/mortaowin/ThaID)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
 
 A single-file TypeScript implementation of an MCP-compatible server with advanced features including SSE streaming, RAG memory, tool calling, and API routing.
 
-## Features
+---
+
+## ✨ Features
 
 - **MCP-compatible SSE endpoint** (`/sse`) for token streaming
 - **Anthropic-compatible proxy** (`/v1/messages`) that routes to OpenAI GPT

@@ -1,6 +1,15 @@
 # 🚀 GOD-TIER MCP Server
 
+![MCP Server Banner](https://raw.githubusercontent.com/mortaowin/ThaID/main/images/8.png)
+
+[![GitHub Stars](https://img.shields.io/github/stars/mortaowin/ThaID?style=social)](https://github.com/mortaowin/ThaID)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18+-green.svg)](https://nodejs.org/)
+
 **เซิร์ฟเวอร์ MCP ขั้นสูงแบบครบเครื่อง** ที่รองรับทั้ง ChatGPT Dev และ Claude Code พร้อมฟีเจอร์เต็มสูบ!
+
+---
 
 ## ✨ ฟีเจอร์หลัก
 
